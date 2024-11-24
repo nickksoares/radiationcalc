@@ -66,12 +66,45 @@ class _RadiationCalculationState extends State<RadiationCalculation> {
     }
   }
 
+  void restoreDefaults() {
+    setState(() {
+      _distanceController.clear();
+      _measurementController.clear();
+      _workingDistanceController.clear();
+      _transportIndexController.clear();
+      calculatorItems.workingDistance! * 0;
+      calculatorItems.readingFromPoint! * 0;
+      calculatorItems.transportIndex! * 0;
+      calculatorItems.distanceFromSource! * 0;
+      calculatorItems.radiationSource! * 0;
+      calculatorItems.radiationOnWork! * 0;
+      calculatorItems.actingForRisk100! * 0;
+      calculatorItems.actingForRisk250! * 0;
+      calculatorItems.safeRadiationSource! * 0;
+      calculatorItems.safeRadiationOnSite! * 0;
+      calculatorItems.safeForRisk100! * 0;
+      calculatorItems.safeForRisk250! * 0;
+    });
+  }
+
+  ElevatedButton restoreDefaultsBtn() {
+    return ElevatedButton(
+      onPressed: restoreDefaults,
+      child: const Text('Restaurar'),
+    );
+  }
+
+  ElevatedButton showResultsBtn() {
+    return ElevatedButton(
+        onPressed: calculateAndDisplayResults, child: const Text('Calcular'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calculadora de Exposição à Radiação'),
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
       ),
       body: Form(
         key: _formKey,
@@ -108,9 +141,12 @@ class _RadiationCalculationState extends State<RadiationCalculation> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: ElevatedButton(
-                  onPressed: calculateAndDisplayResults,
-                  child: const Text('Calcular'),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    showResultsBtn(),
+                    restoreDefaultsBtn(),
+                  ],
                 ),
               ),
               Text(
@@ -122,8 +158,8 @@ class _RadiationCalculationState extends State<RadiationCalculation> {
               Text(
                   'Tempo de atuação para dose de 250mS {h}: ${calculatorItems.actingForRisk250} H'),
               const SizedBox(
-                child: Text(':::::::Considerando o Índice de Transporte:::::::::'),
-                
+                child:
+                    Text(':::::::Considerando o Índice de Transporte:::::::::'),
               ),
               Text(
                   'Radiação no local de atuação: {uS/h} ${calculatorItems.safeRadiationOnSite}'),
