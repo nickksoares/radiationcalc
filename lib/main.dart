@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:radiationcalc/screens/calc_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main(List<String> args) {
   runApp(const RadiationCalculator());
@@ -14,17 +15,13 @@ class RadiationCalculator extends StatelessWidget {
     return MaterialApp(
       title: 'Radiation Calculator',
       theme: theme.copyWith(
-          colorScheme: theme.colorScheme.copyWith(
-              primary: Colors.amber,
-              secondary: Colors.red,
-              surface: Colors.blueGrey[50]),
-          textTheme: theme.textTheme.copyWith(
-              titleSmall: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-              displayMedium: TextStyle(
-                  color: Colors.red, backgroundColor: Colors.orange[100]))),
+        colorScheme: theme.colorScheme.copyWith(
+          primary: Colors.amber,
+          secondary: Colors.red,
+          surface: Colors.blueGrey[50],
+        ),
+        textTheme: GoogleFonts.montserratTextTheme(),
+      ),
       home: const CalculatorScreen(),
       debugShowCheckedModeBanner: false,
     );

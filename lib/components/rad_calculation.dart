@@ -96,7 +96,62 @@ class _RadiationCalculationState extends State<RadiationCalculation> {
 
   ElevatedButton showResultsBtn() {
     return ElevatedButton(
-        onPressed: calculateAndDisplayResults, child: const Text('Calcular'));
+        onPressed: () {
+          calculateAndDisplayResults();
+          (_distanceController.text.isNotEmpty &&
+                  _transportIndexController.text.isNotEmpty &&
+                  _workingDistanceController.text.isNotEmpty)
+              ? _showresults(context)
+              : const Text('Favor inserir um valor válido');
+        },
+        child: const Text('Calcular'));
+  }
+
+  void _showresults(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Resultados do Cálculo'),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                    'Radiação no local de atuação {uS/h}: ${calculatorItems.radiationOnWork}'),
+                Text(
+                    'Radiação a 1m da fonte {uS/h}: ${calculatorItems.radiationSource}'),
+                Text(
+                    'Tempo de atuação para dose de 100mS {h}: ${calculatorItems.actingForRisk100} H'),
+                Text(
+                    'Tempo de atuação para dose de 250mS {h}: ${calculatorItems.actingForRisk250} H'),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    child: Text('Considerando o Índice de Transporte'),
+                  ),
+                ),
+                Text(
+                    'Radiação no local de atuação: {uS/h} ${calculatorItems.safeRadiationOnSite}'),
+                Text(
+                    'Radiação a 1m da fonte {uS/h}: ${calculatorItems.safeRadiationSource}'),
+                Text(
+                    'Tempo de atuação para dose de 100mS {h}: ${calculatorItems.safeForRisk100} H'),
+                Text(
+                    'Tempo de atuação para dose de 250mS {h}: ${calculatorItems.safeForRisk100} H'),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Fechar')),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -149,26 +204,6 @@ class _RadiationCalculationState extends State<RadiationCalculation> {
                   ],
                 ),
               ),
-              Text(
-                  'Radiação no local de atuação {uS/h}: ${calculatorItems.radiationOnWork}'),
-              Text(
-                  'Radiação a 1m da fonte {uS/h}: ${calculatorItems.radiationSource}'),
-              Text(
-                  'Tempo de atuação para dose de 100mS {h}: ${calculatorItems.actingForRisk100} H'),
-              Text(
-                  'Tempo de atuação para dose de 250mS {h}: ${calculatorItems.actingForRisk250} H'),
-              const SizedBox(
-                child:
-                    Text(':::::::Considerando o Índice de Transporte:::::::::'),
-              ),
-              Text(
-                  'Radiação no local de atuação: {uS/h} ${calculatorItems.safeRadiationOnSite}'),
-              Text(
-                  'Radiação a 1m da fonte {uS/h}: ${calculatorItems.safeRadiationSource}'),
-              Text(
-                  'Tempo de atuação para dose de 100mS {h}: ${calculatorItems.safeForRisk100} H'),
-              Text(
-                  'Tempo de atuação para dose de 250mS {h}: ${calculatorItems.safeForRisk100} H'),
             ],
           ),
         ),
