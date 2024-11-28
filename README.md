@@ -19,7 +19,7 @@ RadiationCalc é um aplicativo leve e fácil de usar, desenvolvido para eliminar
 ---
 
 ## 🔧 **Instalação**
-1. Baixe o aplicativo na [Google Play Store](#).
+1. Baixe o aplicativo na [Google Play Store](https://play.google.com/store/apps/details?id=com.nickksoares.radCalc).
 2. Instale em seu dispositivo Android.
 3. Abra o app e comece a usar sem complicações.
 
@@ -67,4 +67,4 @@ Desenvolvido com ❤️ por **Nick Soares**.
 ---
 
 ## 🌟 **Ajude-nos a crescer**
-Se você gostou do aplicativo, deixe uma avaliação na [Google Play Store](#) e compartilhe com seus amigos!
+Se você gostou do aplicativo, deixe uma avaliação na [Google Play Store](https://play.google.com/store/apps/details?id=com.nickksoares.radCalc) e compartilhe com seus amigos!
